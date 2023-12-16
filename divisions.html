@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>NBA-ITW</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+    <link rel="stylesheet" href="myCSS.css" />
+    <link rel="manifest" href="manifest.json" />
+    <style>
+      .list-group-item {
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+        transition: border-bottom 0.3s ease;
+      }
+      .list-group-item:hover {
+        border-bottom: 2px solid #ff0059;
+      }
+      .active {
+        border-bottom: 2px solid #ff0059 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="home.html" tabindex="NBA"
+          ><img src="images/nba.png" alt="NBA" height="24"
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link text-warning"
+                aria-current="page"
+                href="arenas.html"
+                ><i class="fa fa-soccer-ball-o text-warning"></i> Arenas</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-primary"
+                aria-current="page"
+                href="player.html"
+                ><i class="fa fa-user-o text-primary"></i> Players</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-danger"
+                aria-current="page"
+                href="team.html"
+                ><i class="fa fa-users"></i> Teams</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-success"
+                aria-current="page"
+                href="state.html"
+                ><i class="fa fa-map-marker text-success"></i> States</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-info"
+                aria-current="page"
+                href="position.html"
+                ><i class="fa fa-bullseye text-info"></i> Positions</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="seasons.html"
+                ><i
+                  class="fa fa-trophy"
+                  style="color: #ffa500"
+                  aria-hidden="true"
+                >
+                  Seasons</i
+                ></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="divisions.html"
+                ><i class="fa fa-ravelry" aria-hidden="true"> Divisions</i></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="quiz.html"
+                ><i class="fa fa-question-circle" aria-hidden="true">
+                  Quiz</i
+                ></a
+              >
+            </li>
+
+            <li class="nav-item">
+              <button class="btn text-secondary" id="btnSwitch">
+                <i
+                  class="fa fa-moon-o"
+                  aria-hidden="true"
+                  title="Dark/Light"
+                ></i>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!--Start-->
+    <div class="container-md col-10" style="margin-top: 5%">
+      <div class="row">
+        <!-- ko foreach: Divisions -->
+        <div class="col-6 col-md-4 col-lg-2">
+          <a
+            href="#"
+            class="list-group-item list-group-item-action"
+            data-bind="click: function() { getTeams(Id, event) },
+                              css: { 'active': viewModel.selectedDivision() === Id }"
+          >
+            <span class="fw-bolder" data-bind="text: Id+' '"></span>
+            <span data-bind="text: Name"></span>
+          </a>
+        </div>
+        <!-- /ko -->
+      </div>
+      <hr />
+      <hr class="col-8" />
+      <hr />
+      <div class="row" style="margin-top: 2%">
+        <!-- ko foreach: Teams-->
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+          <a
+            data-bind="attr: {href: './teamDetails.html?' + Id + '&acronym=' + Acronym}"
+            title="TeamDetails"
+          >
+            <div class="card CardBg">
+              <img
+                data-bind="attr: { src: Logo||'./images/notfound.png', alt: Name }"
+                class="card-img-top"
+                alt="Team Logo"
+                style="height: 300px"
+              />
+              <div class="card-body" style="text-align: center">
+                <h5 data-bind="text: Acronym" class="card-title"></h5>
+              </div>
+            </div>
+          </a>
+        </div>
+        <!-- /ko -->
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="myModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              <img src="images/nba.png" height="30" /> Loading data...
+            </h5>
+          </div>
+          <div class="modal-body text-center">
+            <i class="fa fa-spin fa-3x fa-refresh"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar bg-body-tertiary fixed-bottom">
+      <div class="container small">
+        <div class="navbar-text">
+          &copy; Introdução as Tecnologias Web - 2023/24
+        </div>
+        <div class="navbar-text">T.Vicente (121497)</div>
+        <div class="navbar-nav">
+          <div class="nav-item text-end text-light">
+            <a href="https://www.ua.pt" class="nav-link"
+              >Universidade de Aveiro</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"></script>
+    <script src="division.js"></script>
+    <script src="myJS.js"></script>
+  </body>
+</html>
